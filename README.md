@@ -29,19 +29,25 @@ For that you need to have jupyter notebook and the
 
 Contains code to run the simulations. The main scripts are:
 
-- [1_mlds_recovers_under_additive_noise.py]([simulation/1_mlds_recovers_under_additive_noise.py]) simulations of transducers with *additive* noise
-- [2_mlds_recovers_under_multiplicative_noise.py]([simulation/2_mlds_recovers_under_multiplicative_noise.py]) simulations of transducers with multiplicative noise
+- [1_mlds_recovers_under_additive_noise.py](simulation/1_mlds_recovers_under_additive_noise.py) simulations of transducers with *additive* noise. Reproduces Fig. 5 and 9A
+- [2_mlds_recovers_under_multiplicative_noise.py](simulation/2_mlds_recovers_under_multiplicative_noise.py) simulations of transducers with multiplicative noise. Reproduces Fig. 6 and 9B
 
-Both scripts run simulations and saves data to folder `data`.
-If data already exist, then it just loads the data and skips the simulations.
-The simulation code above uses the following utility functions
+Both scripts run the simulations and saves data to folder `data`.
+It takes several hours in a laptop computer. If data already exist (as it is the case in this repository), then scripts loads the data and skip the simulations.
+
+- [plot_cases_equal_sensitivity.py](simulation/plot_cases_equal_sensitivity.py) reads simulated data and reproduces Fig. 8
+- [plot-RMSE.py](simulation/plot-RMSE.py) reads simulate data reproduces Fig. 7
+
+The code also uses the following utility functions
 
 - [tranducers.py](simulation/transducers.py): transducer definitions
 - [simulate_mlds_experiment.py](simulation/simulate_mlds_experiment.py): observer model and estimation of scales
-- [plotting.py](simulation/plotting.py): plotting functions
-- [utils.py](simulation/utils.py): misc.
+- [plotting.py](simulation/plotting.py): utilities for plotting, color palettes, etc. 
+- [utils.py](simulation/utils.py): miscelaneous computations
 
+### Folder `data`
 
+Simulated MLDS experiments and transducer parameters used.
 
 ## Authors and Acknowledgments
 
