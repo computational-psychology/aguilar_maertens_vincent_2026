@@ -33,7 +33,7 @@ Contains code to run the simulations. The main scripts are:
 - [2_mlds_recovers_under_multiplicative_noise.py](simulation/2_mlds_recovers_under_multiplicative_noise.py) simulations of transducers with multiplicative noise. Reproduces Fig. 6 and 9B
 
 Both scripts run the simulations and saves data to folder `data`.
-It takes several hours in a laptop computer. If data already exist (as it is the case in this repository), then scripts loads the data and skip the simulations.
+It takes several hours in a laptop computer. If data already exist (as it is the case for this repository), then scripts loads the data and skip the simulations.
 
 - [plot_cases_equal_sensitivity.py](simulation/plot_cases_equal_sensitivity.py) reads simulated data and reproduces Fig. 8
 - [plot-RMSE.py](simulation/plot-RMSE.py) reads simulate data reproduces Fig. 7
