@@ -1,2 +1,5 @@
 *.ipynb_checkpoints*
 *__pycache__*
+
+*triads.csv
+*triads_norm_probit.MLDS
