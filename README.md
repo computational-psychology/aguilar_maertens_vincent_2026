@@ -60,37 +60,12 @@ per triad, and 100 simulated experiments per condition.
 
 
 
-**`1_mlds_recovers_under_additive_noise.py`**
-
-| Manuscript figure | Output file (in `figs/`) |
+| Script | Manuscript figures |
 | --- | --- |
-| Fig. 5 (scales, additive noise) | `additive-noise_scales.10.10.100.pdf` |
-| Fig. 9A (exponent recovery) | `additive-noise_paramfit-hists-boxplot.10.10.100.pdf` |
-| Appendix (additive-noise error/bias) | `additive-noise_errors.10.10.100.pdf` |
-
-**`2_mlds_recovers_under_multiplicative_noise.py`**
-
-| Manuscript figure | Output file (in `figs/`) |
-| --- | --- |
-| Fig. 6 (scales, multiplicative noise) | `multiplicative-noise_scales.10.10.100.pdf` |
-| Fig. 9B (exponent recovery) | `multiplicative-noise_paramfit-hists-boxplot.10.10.100.pdf` |
-| Appendix (multiplicative-noise error/bias) | `multiplicative-noise_errors.10.10.100.pdf` |
-
-
-Two other scripts reproduce additional figures from the manuscript:
-
-**`plots_cases_equal_sensitivity.py`**
-
-| Manuscript figure | Output file (in `figs/`) |
-| --- | --- |
-| Fig. 4 (ground-truth transducer shapes) | `ground_truths_function_shapes.pdf` |
-| Fig. 8 (cases of equal sensitivity) | `equal_sensitivity.10.10.100.pdf` |
-
-**`plot-RMSE.py`**
-
-| Manuscript figure | Output file (in `figs/`) |
-| --- | --- |
-| Fig. 7 (RMSE summary) | `rmse_summary.10.10.100.pdf` |
+| `1_mlds_recovers_under_additive_noise.py` | Fig. 5 (scales, additive noise), Fig. 9A (exponent recovery), Appendix (additive-noise error/bias) |
+| `2_mlds_recovers_under_multiplicative_noise.py` | Fig. 6 (scales, multiplicative noise), Fig. 9B (exponent recovery), Appendix (multiplicative-noise error/bias) |
+| `plots_cases_equal_sensitivity.py` | Fig. 4 (ground-truth transducer shapes), Fig. 8 (cases of equal sensitivity) |
+| `plot-RMSE.py` | Fig. 7 (RMSE summary) |
 
 
 The are also supporting modules, which are imported by the scripts above:
