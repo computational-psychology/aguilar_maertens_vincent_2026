@@ -639,9 +639,6 @@ plt.savefig(
 
 #plt.show()
 
-# %% [markdown]
-# (EDIT THIS, just copied from additive) Under additive noise, we see that MLDS recovery performance is great (mean RMSE 1-3%),
-# and consistent across the different transducer shapes (Weber fractions).
 
 # %% [markdown]
 # ### Distribution of errors
