@@ -15,9 +15,9 @@ Repository: https://github.com/computational-psychology/aguilar_maertens_vincent
 ### Requirements
 
 - Python 3.12 (tested with 3.12.9).
-- The libraries pinned in [`requirements.txt`](requirements.txt): numpy, scipy,
+- The libraries in [`requirements.txt`](requirements.txt): numpy, scipy,
   pandas, matplotlib, seaborn.
-- **Only to re-run the simulations** (not needed to reproduce the figures): our
+- Only to re-run the simulations, not needed to reproduce the figures: our
   [Python wrapper for MLDS](https://github.com/computational-psychology/mlds)
   (v1.0.1), which wraps the R package `MLDS` and requires a working R
   installation. Follow the instructions in that repository to install it.
