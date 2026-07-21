@@ -200,7 +200,7 @@ def add_label(trans_type, sigma, **kwargs):
         ax.annotate(
             rf"k = {weber_fraction}",
             xy=(1, 0.2),
-            fontsize=sns.plotting_context()["axes.labelsize"],
+            fontsize=0.85 * sns.plotting_context()["axes.labelsize"],
             ha="right",
         )
 
@@ -390,8 +390,9 @@ mean_scales = filter_cases(mean_scales, 'sigma', show_sigma)
 
 # %%
 ## plot all simulated cases
+sns.set_context("paper", font_scale=1.3)
 grid_scales = sns.FacetGrid(
-    data=mean_scales, col="trans_type", row="sigma", 
+    data=mean_scales, col="trans_type", row="sigma",
     col_order = ['log', '0.33', '0.5', '1.0', '2.0', '3.0'], # exponents
     height=2, margin_titles=True, aspect=1.0,
     sharey=True,
@@ -406,6 +407,11 @@ grid_scales.set_titles(
     row_template=r"$\sigma = {row_name:.3f}$",
     col_template=r"$\alpha = {col_name}$"
 )
+
+# the logarithmic transducer has no exponent, so show just "log"
+for _ax, _col in zip(grid_scales.axes[0], grid_scales.col_names):
+    if _col == "log":
+        _ax.set_title(r"$log$")
 grid_scales.map(add_label, "trans_type", "sigma")
 grid_scales.set_axis_labels(
     y_var="", x_var="", clear_inner=True
@@ -508,23 +514,35 @@ def add_RMSE_label(trans_type, sigma, rmses, **kwargs):
     ax.annotate(
         rf"{rmses_subset['mean_rmse'].values[0]:.2%} $\pm$ {rmses_subset['std_rmse'].values[0]:.2%}",
         xy=xyposition,
-        fontsize=sns.plotting_context()["axes.labelsize"],
+        fontsize=0.85 * sns.plotting_context()["axes.labelsize"],
         ha=ha,
     )
 
 
 grid_scales.map(add_RMSE_label, "trans_type", "sigma", rmses=rmses_agg)
 grid_scales.set_titles(
-    "", 
+    "",
     row_template=r"$\sigma = {row_name:.3f}$",
     col_template=r"$\alpha = {col_name}$"
 )
+# the logarithmic transducer has no exponent, so show just "log"
+for _ax, _col in zip(grid_scales.axes[0], grid_scales.col_names):
+    if _col == "log":
+        _ax.set_title(r"$log$")
 grid_scales.set_axis_labels(
     y_var="", x_var="", clear_inner=True
 )
 
-grid_scales.fig.supylabel(r"Perceptual scale $\Psi(s)$")
-grid_scales.fig.supxlabel(r"Stimulus value $s$")
+grid_scales.fig.supylabel(r"Perceptual scale $\Psi(s)$", x=0.035, y=0.5)
+grid_scales.fig.supxlabel(r"Stimulus value $s$", y=0.04)
+
+# keep three x-axis ticks despite the larger font
+for _ax in grid_scales.axes.flat:
+    _ax.set_xticks([0, 0.5, 1.0])
+
+# prevent the sigma row labels on the right from being clipped in the saved PDF
+for _t in grid_scales.fig.findobj(mpl.text.Text):
+    _t.set_clip_on(False)
 
 plt.savefig(
     Path().resolve().parent / "figs" / f"additive-noise_scales.{suffix}.pdf",
@@ -574,6 +592,11 @@ hists.set_titles(
     row_template=r"$\sigma = {row_name:.3f}$",
     col_template=r"$\alpha = {col_name}$"
 )
+
+# the logarithmic transducer has no exponent, so show just "log"
+for _ax, _col in zip(hists.axes[0], hists.col_names):
+    if _col == "log":
+        _ax.set_title(r"$log$")
 
 hists.set_axis_labels(
     y_var="", x_var="", clear_inner=True
@@ -952,6 +975,11 @@ def add_refline(data, **kwargs):
 sigma_hists.map_dataframe(add_refline)  
 
 sigma_hists.set_titles(col_template=r"$\alpha = {col_name}$")
+
+# the logarithmic transducer has no exponent, so show just "log"
+for _ax, _col in zip(sigma_hists.axes[0], sigma_hists.col_names):
+    if _col == "log":
+        _ax.set_title(r"$log$")
 
 sigma_hists.set_axis_labels(y_var="", x_var="", clear_inner=True)
 

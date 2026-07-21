@@ -40,7 +40,7 @@ palette = {'log': '#636363',
           '3.0': reds[6],
           }
 
-sns.set_context('paper')
+sns.set_context('paper', font_scale=1.3)
 
 n_samples_mlds = 10
 n_repeats = 10
@@ -246,10 +246,11 @@ rmses_agg[(rmses_agg['type_noise']=='multiplicative') & mask].groupby(['amount_n
 
 # %%
 grid_scales = sns.FacetGrid(
-    data=rmses, col="type_noise", 
+    data=rmses, col="type_noise",
     hue='trans_type', palette=palette,
+    hue_order=['log', '0.33', '0.5', '0.75', '1.0', '1.5', '2.0', '3.0'],
     height=3.5, margin_titles=True, aspect=1,
-    #xlim=(0, 0.41),
+    xlim=(0, 0.41),
     #sharey=False, sharex=False,
     sharex=True, sharey=True,
     col_order = ['additive', 'multiplicative'],
@@ -257,7 +258,13 @@ grid_scales = sns.FacetGrid(
 
 grid_scales.map(sns.lineplot, 'amount_noise', 'rmse', err_style="bars", errorbar=("sd", 1),
                linewidth=2)
-grid_scales.add_legend(title='Tranducer')
+grid_scales.add_legend(title="")
+# relabel legend entries as transducer functions ($log(s)$, $s^{p}$)
+_labelmap = {'log': r'$log(s)$', '0.33': r'$s^{0.33}$', '0.5': r'$s^{0.5}$',
+             '0.75': r'$s^{0.75}$', '1.0': r'$s^{1.0}$', '1.5': r'$s^{1.5}$',
+             '2.0': r'$s^{2.0}$', '3.0': r'$s^{3.0}$'}
+for _txt in grid_scales._legend.texts:
+    _txt.set_text(_labelmap.get(_txt.get_text(), _txt.get_text()))
 #grid_scales.set(xscale="log")
 #grid_scales.set(yscale="log")
 

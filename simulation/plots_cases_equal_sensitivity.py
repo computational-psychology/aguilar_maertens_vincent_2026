@@ -45,7 +45,7 @@ palette = {'log': '#636363',
           '3.0': reds[6],
           }
 
-sns.set_context('paper')
+sns.set_context('paper', font_scale=1.3)
 
 n_samples_mlds = 10
 n_repeats = 10
@@ -241,7 +241,7 @@ grid_scales.map(plot_panel, "stimulus", "mean_scale", "CI_low", "CI_high", "tran
 
 
 grid_scales.set_titles(
-    "", col_template=r"Weber fraction ($k$) = {col_name}"
+    "", col_template=r"$k$ = {col_name}"
 )
 grid_scales.set_axis_labels(
     y_var="", x_var="", clear_inner=True
@@ -249,6 +249,17 @@ grid_scales.set_axis_labels(
 
 grid_scales.fig.supylabel(r"Perceptual scale", x=0)
 grid_scales.fig.supxlabel(r"Stimulus intensity $(s)$")
+
+# transducer legend ($log(s)$, $s^{p}$), matching the ground-truth colors
+from matplotlib.lines import Line2D
+_legend_order = ['log', '0.33', '0.5', '0.75', '1.0', '1.5', '2.0', '3.0']
+_handles = [
+    Line2D([0], [0], color=palette[t], lw=2,
+           label=(r'$log(s)$' if t == 'log' else rf'$s^{{{t}}}$'))
+    for t in _legend_order
+]
+grid_scales.fig.legend(handles=_handles, loc='center left',
+                       bbox_to_anchor=(1.0, 0.5), frameon=True)
 
 plt.savefig(
     Path().resolve().parent / "figs" / f"equal_sensitivity.{suffix}.pdf",
