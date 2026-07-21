@@ -40,20 +40,20 @@ LICENSE
 
 ## Simulations and reproducing the figures
 
-The simulation code lives in two main scripts inside `simulation/`:.
+The simulation code lives in two main scripts inside `simulation/`:
 
 - `1_mlds_recovers_under_additive_noise.py` for additive noise 
 - `2_mlds_recovers_under_multiplicative_noise.py` for multiplicative noise
 
-The scripts run the simulation (or alterantive, read simulated data run previously),
-and do the plotting, writing them as PDFs to `figs/`.
+The scripts run the simulation (or alternatively, read simulated data run previously),
+and do the plotting, writing the figures as PDFs to `figs/`.
 
 
 We provided the simulated data in `data/`, so the figures can be regenerated without the need to re-run all simulations from scratch.
-These CSV files contained the results of simulated MLDS experiments 
+These CSV files contain the results of simulated MLDS experiments 
 ( `additive-noise.scales.10.10.100.csv`, `multiplicative-noise.scales.10.10.100.csv`)
 as well as the parameters used in the simulations
-( `additive-noise.params.csv` and  `multiplicative-noise.params.csv`)
+( `additive-noise.params.csv` and  `multiplicative-noise.params.csv`).
 The `10.10.100` suffix encodes the simulation settings
 `n_stimulus_levels.n_repeats.n_simulations`, i.e. 10 stimulus levels, 10 repeats
 per triad, and 100 simulated experiments per condition.
@@ -68,7 +68,7 @@ per triad, and 100 simulated experiments per condition.
 | `plot-RMSE.py` | Fig. 7 (RMSE summary) |
 
 
-The are also supporting modules, which are imported by the scripts above:
+There are also supporting modules, which are imported by the scripts above:
 
 - `simulation/transducers.py` - transducer function definitions (power-law and
   logarithmic) with additive and multiplicative noise.
