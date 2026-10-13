@@ -53,7 +53,7 @@ def generate_triads(stim_levels, n_repeats=15):
     return triads
 
 
-def simulate_observer(triads, transducer):
+def simulate_observer(triads, transducer, tie_breaking="random"):
     """Given a (noisy) transducer function, simulate an observer doing the method of triads
 
     Parameters
@@ -62,6 +62,13 @@ def simulate_observer(triads, transducer):
         pandas.Dataframe with columns "s1", "s2" and "s3" containing the stimulus values
     transducer : callable
         Transducer function to be called for all stimulus values
+    tie_breaking : str, optional
+        how to resolve trials where the decision variable is exactly zero.
+        "random" (default) assigns each tie to either response with probability
+        one half; "lower" assigns every tie to response 0. Ties have probability
+        zero under continuous (Gaussian) noise, but not under a discrete
+        representation such as Poisson, where assigning them all to one response
+        biases the response proportions. The default is "random".
 
     Returns
     -------
@@ -70,6 +77,9 @@ def simulate_observer(triads, transducer):
         values ("psi_1..3"), decision variable ("delta_..") and binary response variable
         ("Response")
     """
+    if tie_breaking not in ("random", "lower"):
+        raise ValueError(f"tie_breaking must be 'random' or 'lower', got {tie_breaking!r}")
+
     # APPLY TRANSDUCER
     # Samples from transducer
     triads["psi_1"] = transducer(triads["s1"])
@@ -84,8 +94,16 @@ def simulate_observer(triads, transducer):
     triads["delta"] = triads["delta_32"] - triads["delta_21"]
 
     # Binarize
-    triads["Response"] = triads["delta"] > 0
-    triads["Response"] = triads["Response"].astype(int)
+    response = (triads["delta"] > 0).to_numpy().astype(int)
+
+    if tie_breaking == "random":
+        # Only consume random numbers if there actually are ties, so that this
+        # is a no-op on the random number stream for continuous noise.
+        ties = (triads["delta"] == 0).to_numpy()
+        if ties.any():
+            response[ties] = np.random.randint(0, 2, size=int(ties.sum()))
+
+    triads["Response"] = response
 
     return triads
 
@@ -136,7 +154,12 @@ def estimate_scales(data, standardscale=True, boot=False):
 
 
 def simulate_MLDS_experiment(
-    stim_levels, transducer, n_repeats=15, standardscale=True, n_simulations=1
+    stim_levels,
+    transducer,
+    n_repeats=15,
+    standardscale=True,
+    n_simulations=1,
+    tie_breaking="random",
 ):
     """Simulates an MLDS experiment with a given transducer and triads.
 
@@ -154,6 +177,9 @@ def simulate_MLDS_experiment(
         The default is True.
     n_simulations : int, optional
         number of simulations to run, by default 1
+    tie_breaking : str, optional
+        how to resolve trials where the decision variable is exactly zero,
+        passed to simulate_observer. The default is "random".
 
     Returns
     -------
@@ -170,7 +196,7 @@ def simulate_MLDS_experiment(
     # Loop over rest, accumulate
     for i in range(n_simulations):
         # simulate the observer
-        df = simulate_observer(triads, transducer)
+        df = simulate_observer(triads, transducer, tie_breaking=tie_breaking)
 
         # estimate the scales
         scale_df, sigma = estimate_scales(data=df, standardscale=standardscale)
