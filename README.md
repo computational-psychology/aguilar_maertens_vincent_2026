@@ -73,9 +73,25 @@ per triad, and 100 simulated experiments per condition.
 | `plots_cases_equal_sensitivity.py` | Fig. 4 (ground-truth transducer shapes), Fig. 8 (cases of equal sensitivity) |
 | `plot-RMSE.py` | Fig. 7 (RMSE summary) |
 
-Fig. 9 in the manuscript combines the two figures
-`additive-noise_paramfit-hists-boxplot.10.10.100.pdf` (panel A) and
-`multiplicative-noise_paramfit-hists-boxplot.10.10.100.pdf` (panel B).
+The simulation result figures of the manuscript correspond to these files in `figs/`:
+
+| Manuscript figure | File in `figs/` |
+| --- | --- |
+| Fig. 4 | `ground_truths_function_shapes.pdf` |
+| Fig. 5 | `additive-noise_scales.10.10.100.pdf` |
+| Fig. 6 | `multiplicative-noise_scales.10.10.100.pdf` |
+| Fig. 7 | `rmse_summary.10.10.100.pdf` |
+| Fig. 8 | `equal_sensitivity.10.10.100.pdf` |
+| Fig. 9A | `additive-noise_paramfit-hists-boxplot.10.10.100.pdf` |
+| Fig. 9B | `multiplicative-noise_paramfit-hists-boxplot.10.10.100.pdf` |
+| Suppl. Fig. S1 | `additive-noise_errors.10.10.100.pdf` |
+| Suppl. Fig. S2 | `multiplicative-noise_errors.10.10.100.pdf` |
+| Suppl. Fig. S3 | `poisson-noise_scales.10.10.100.pdf` |
+| Suppl. Fig. S4 | `poisson-noise_errors.10.10.100.pdf` |
+| Suppl. Fig. S5 | `poisson-noise_paramfit-exponent-boxplot.10.10.100.pdf` |
+
+The other files in `figs/` are additional outputs of the scripts that are not
+shown in the manuscript.
 
 
 There are also supporting modules, which are imported by the scripts above:
