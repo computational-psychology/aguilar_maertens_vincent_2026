@@ -3,7 +3,7 @@
 Simulation code and data to reproduce the results and figures of the manuscript:
 
 > Aguilar, G., Maertens, M., & Vincent, J. (2026). *Using simulation to disambiguate transducer and noise.*
-> Journal of Vision (accepted). DOI: to be added.
+> Journal of Vision (accepted). [DOI: 10.1167/jov.26.10.12](https://jov.arvojournals.org/article.aspx?articleid=2818674) 
 
 The paper is a simulation study of Maximum Likelihood Difference Scaling (MLDS):
 it tests whether MLDS can recover a known transducer function from data generated
